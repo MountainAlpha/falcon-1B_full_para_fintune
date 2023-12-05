@@ -44,7 +44,7 @@ sh ./run.sh ./alpaca-cot-en-refine2.yaml
 3. 数据清洗  
 `cd data-juicer`  
 `python tools/process_data.py --config ./alpaca-cot-en-refine2.yaml` （修改dataset_path、export_path）  
- 
+
 4. 数据采样  
 `cd lm-training`
 `python get_train_dataset_1b.py`（修改EN_DATA_DIR、ZH_DATA_DIR、OUTPUT_FILES）  
@@ -57,8 +57,5 @@ sh ./run.sh ./alpaca-cot-en-refine2.yaml
 `cd lm-evaluation-harness`
 `sh examples/challenge-1B-stage1.sh{mode} {model_path} {output_path}`
 
-## 注意事项和联系
+## 注意事项
 利用质量分类器进行数据打分和利用得分过滤数据集的时候，该步骤本身不具有随机性，但数据集内的数据顺序会发生变化，该步骤可能会导致最终训练得分的少量波动。如若想完整复现最优模型，可参考data_en_32.jsonl内的键值对顺序重新排序。
-
-Tel：17634327832  
-Email：546828450@qq.com
