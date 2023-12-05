@@ -1,0 +1,31 @@
+# global parameters
+project_name: 'Data-Juicer-recipes-alpaca-cot-en'
+dataset_path: '/data/home/81054062/studyplace/competition/baichuan2fintune/competition_kit/process/31/data_en_22.jsonl'
+export_path: '/data/home/81054062/studyplace/competition/baichuan2fintune/competition_kit/process/31/data_en_31.jsonl'
+
+np: 50  # number of subprocess to process your dataset
+open_tracer: true
+
+# process schedule
+# a list of several process operators with their arguments
+process:
+  - stopwords_filter: # 去除经典无用词汇
+        lang: 'en'
+
+  - stopwords_filter: # 去除经典无用词汇
+      lang: 'en'
+
+  - character_repetition_filter: # 去重重复性高的文本
+      rep_len: 10
+      max_ratio: 0.8 # 0.6
+
+  - perplexity_filter: # 复杂度过滤
+      max_ppl: 1000
+    
+  - document_simhash_deduplicator:  # 去重
+      tokenization: space
+      window_size: 3
+      lowercase: true
+      ignore_pattern: '\p{P}'
+      num_blocks: 9
+      hamming_distance: 7
